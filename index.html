@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhaka, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class(<span id="first-class-total">$150</span>)</label>
+                    <input id="first-class-count" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="ticketCategory('first', false)" class="btn btn-danger"><i class="fas fa-minus-square"></i></button>
+                    <button onclick="ticketCategory('first', true)" class="btn btn-success"><i class="fas fa-plus-square"></i></button>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy(<span id="economy-class-total">$100</span>)</label>
+                    <input id="economy-class-count" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <button onclick="ticketCategory('economy', false)" class="btn btn-danger"><i class="fas fa-minus-square"></i></button>
+                    <button onclick="ticketCategory('economy', true)" class="btn btn-success"><i class="fas fa-plus-square"></i></button>
+                </div>
+            </div>
+
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="subtotal">$0</p>
+                    </div>
+                </div>
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="vat">$0</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="total">$0</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="m()" class="btn-style">Book Now</button>
+
+            <div id="a" class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                <hr>
+                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+              </div>
+
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore quo dolores aliquid incidunt amet nihil expedita. Vero culpa, consequatur atque ipsa aperiam molestiae libero similique reprehenderit. Similique harum, unde eos in blanditiis nesciunt veritatis officia. Hic ducimus aperiam officia sint et asperiores voluptas at, nostrum aliquam aut deleniti aspernatur consectetur?</p>
+        </div>
+    </section>
+
+    <script>
+        function ticketCategory (category, ticketIncrease){
+            const firstClassInput = document.getElementById(category + '-class-count');
+            const classCount = parseInt(firstClassInput.value);
+        let classNewCount = classCount;
+        if (ticketIncrease == true){
+            classNewCount = classCount + 1;
+        };
+        if (ticketIncrease == false && classCount > 0){
+            classNewCount = classCount - 1;
+        };
+        firstClassInput.value = classNewCount;
+        let firstClassTotal = 0;
+        if (category == 'first'){
+        firstClassTotal = classNewCount * 150;
+        };
+        if (category == 'economy'){
+        firstClassTotal = classNewCount * 100;
+        };
+        document.getElementById(category + '-class-total').innerText = '$' + firstClassTotal;
+        calculateTotal();
+        };
+        
+        function calculateTotal(){
+            const numOfFirst = document.getElementById('first-class-count');
+            const firstCount = parseInt(numOfFirst.value);
+
+            const numOfEco = document.getElementById('economy-class-count');
+            const ecoCount = parseInt(numOfEco.value);
+
+            const totalPrice = firstCount * 150 + ecoCount * 100;
+            document.getElementById('subtotal').innerText = '$' + totalPrice;
+
+            const vat = totalPrice * 0.1;
+            document.getElementById('vat').innerText = '$' + vat;
+
+            const grandTotal = totalPrice + vat;
+            document.getElementById('total').innerText = '$' + grandTotal;
+        }
+
+
+        function m(){
+            document.getElementById('a').style.display = "block";
+       
+    
+        }
+
+    </script>
+</body>
+
+</html>
