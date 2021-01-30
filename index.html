@@ -98,16 +98,19 @@
                     </div>
                 </div>
             </div>
-            <button onclick="m()" class="btn-style">Book Now</button>
+            <button onclick="bookConfirmation()" class="btn-style">Book Now</button>
 
-            <div id="a" class="alert alert-success" role="alert">
-                <h4 class="alert-heading">Well done!</h4>
-                <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+            <div id="book-now" class="alert alert-success" role="alert">
+                <i id="user-check" class="fas fa-user-check"></i>
+                <h4 id="booked-header" class="alert-heading">Ticket Booked Successfully!</h4>
                 <hr>
-                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                <p>First class ticket booked: <span id="first-class-book">0</span></p>
+                <p>Economy class ticket booked: <span id="eco-class-book">0</span></p>
+                <p>Subtotal: <span id="subtotal-count">0</span>$</p>
+                <p>VAT: <span id="vat-count">0</span>$</p>
+                <p>Total: <span id="total-count">0</span>$</p>
               </div>
-
-        </div>
+            </div>
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
@@ -126,6 +129,7 @@
         if (ticketIncrease == false && classCount > 0){
             classNewCount = classCount - 1;
         };
+        
         firstClassInput.value = classNewCount;
         let firstClassTotal = 0;
         if (category == 'first'){
@@ -141,27 +145,28 @@
         function calculateTotal(){
             const numOfFirst = document.getElementById('first-class-count');
             const firstCount = parseInt(numOfFirst.value);
-
+            document.getElementById('first-class-book').innerText = firstCount;
+            
             const numOfEco = document.getElementById('economy-class-count');
             const ecoCount = parseInt(numOfEco.value);
+            document.getElementById('eco-class-book').innerText = ecoCount;
 
             const totalPrice = firstCount * 150 + ecoCount * 100;
             document.getElementById('subtotal').innerText = '$' + totalPrice;
+            document.getElementById('subtotal-count').innerText = totalPrice;
 
             const vat = totalPrice * 0.1;
             document.getElementById('vat').innerText = '$' + vat;
+            document.getElementById('vat-count').innerText = vat;
 
             const grandTotal = totalPrice + vat;
             document.getElementById('total').innerText = '$' + grandTotal;
-        }
+            document.getElementById('total-count').innerText = grandTotal;
+        };
 
-
-        function m(){
-            document.getElementById('a').style.display = "block";
-       
-    
-        }
-
+        function bookConfirmation(){
+            document.getElementById('book-now').style.display = "block";
+        };        
     </script>
 </body>
 

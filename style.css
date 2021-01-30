@@ -13,7 +13,6 @@ body{
     background-attachment: scroll;
     background-size: cover;
 }
-
 nav{
     height: 50px;
     width: 100%;
@@ -105,7 +104,6 @@ nav ul li a:hover, a.active{
     font-weight: 400;
     margin-bottom: 25px;
 }
-
 .btn-style{
     display: block;
     width: 100%;
@@ -120,6 +118,13 @@ nav ul li a:hover, a.active{
     display: flex;
     justify-content: space-between;
 }
-#a{
+#book-now{
     display: none;
+}
+#user-check{
+    font-size: 3em;
+    margin-left: 3em;
+}
+#booked-header{
+    text-align: center;
 }
